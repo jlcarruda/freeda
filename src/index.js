@@ -1,7 +1,8 @@
 const glob = require('glob')
 const Glob = glob.Glob
 const path = require('path')
-const models = require('./models.js');
+const models = require('./models.js')
+const router = require('./router.js')
 
 exports.init = (app, config) => {
   // Require all controllers into array
@@ -32,7 +33,8 @@ exports.init = (app, config) => {
           models.createModel(require(absolutePath))
         })
         console.log('------------ Ended Building Models -----------');
-        resolve();
+        router.init(app)
+        resolve()
       })
     })
   })
