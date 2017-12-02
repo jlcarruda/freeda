@@ -1,5 +1,5 @@
 
 
-exports.init = (controllers) => {
+exports.init = (app, controllers) => {
   
 }

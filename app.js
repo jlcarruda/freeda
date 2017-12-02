@@ -5,6 +5,11 @@ const FreedaAPI = require('./src/index.js')
 
 const app = express();
 
+global.API = {
+  controllers: [],
+  models: []
+}
+
 app.all('/*', function(req, res, next) {
   // CORS headers
   res.header("Access-Control-Allow-Origin", "*") // restrict it to the required domain
@@ -23,9 +28,14 @@ app.use(helmet())
 
 
 FreedaAPI.init(app, config).then( () => {
-  
+    if(process.env.NODE_ENV == 'production') {
+      config.port = process.env.PORT
+      config.host = process.env.IP
+    }
+
     app.listen(config.port, config.host, (err) => {
-      console.log('FreedaAPI is ALIVE!');
+      console.log('FreedaAPI is ALIVE!')
+      console.log('Running on', `${config.host}:${config.port}`);
     })
 });
 
