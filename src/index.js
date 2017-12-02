@@ -12,7 +12,7 @@ exports.init = (app, config) => {
         let entityName = splitted[3]
   
         //HACK: OLOCO BIXO que gambs
-        let absolutePath = __dirname + '\\..\\' + filePath.slice(1, filePath.length) 
+        let absolutePath = `${__dirname}${path.sep}..${path.sep}${filePath.slice(1, filePath.length)}` 
         
         API.controllers[entityName] = require(absolutePath)
       })
@@ -20,21 +20,21 @@ exports.init = (app, config) => {
     
     // Connect to the database
     models.connect().then( () => {
+      console.log('------------ Building Models -----------');
       new Glob("./src/entities/**/model.js", (err, matches) => {
         matches.forEach((filePath) => {
           let splitted = filePath.split('/')
           let entityName = splitted[3]
     
           //HACK: OLOCO BIXO que gambs
-          let absolutePath = __dirname + '\\..\\' + filePath.slice(1, filePath.length) 
+          let absolutePath = `${__dirname}${path.sep}..${path.sep}${filePath.slice(1, filePath.length)}` 
           
           models.createModel(require(absolutePath))
         })
-
+        console.log('------------ Ended Building Models -----------');
         resolve();
       })
     })
-    
   })
   
 }

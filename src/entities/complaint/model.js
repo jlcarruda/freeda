@@ -6,4 +6,4 @@ exports.methods = {
 
 }
 
-exports.name = 'Complaint'
+exports.name = 'Complaints'
