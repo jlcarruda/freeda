@@ -34,9 +34,11 @@ exports.init = (app, config) => {
         })
         console.log('------------ Ended Building Models -----------');
         router.init(app)
+
+        // saveMockupPoints()
+
         resolve()
       })
     })
   })
-  
 }

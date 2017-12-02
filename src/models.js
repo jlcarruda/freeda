@@ -15,6 +15,10 @@ exports.createModel = (blueprint) => {
     model.statics = blueprint.statics
   }
 
+  if(blueprint.query) {
+    model.query = blueprint.query
+  }
+
   API.models[blueprint.name] = mongoose.model(blueprint.name, model);
   console.log(`... builded model "${blueprint.name}"`);
 }

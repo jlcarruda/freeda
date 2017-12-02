@@ -1,7 +1,27 @@
 exports.name = 'DangerPoints'
 
-exports.Schema = {}
+exports.Schema = {
+  lat: String,
+  lng: String,
+  type: String,
+  votes: Number
+}
 
 exports.methods = {}
 
-exports.statics = {}
+exports.query = {
+  byType: function(type) {
+    return this.find( {type: type} )
+  }
+}
+
+exports.statics = {
+
+  insert: function(data) {
+    return new Promise( (resolve, reject) => {
+      if(!data) return reject(403)
+
+      resolve(200)
+    })
+  }
+}

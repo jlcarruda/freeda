@@ -10,6 +10,10 @@ exports.Schema = {
   type: String,
   phone: String,
   created: {type: Date, default: Date.now},
+  date: String,
+  timestamp: String,
+  address: String,
+  
   deviceToken: String
 }
 
@@ -37,8 +41,6 @@ exports.statics = {
       if(!json) {
         return resolve(400)
       }
-
-      json._id = mongoose.Types.ObjectId()
       
       this.create(json, (err, created) => {
         if(err) return reject(err)

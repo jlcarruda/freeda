@@ -6,7 +6,14 @@ exports.insertComplaint = (req, res, next) => {
   }).catch(next)
 }
 
-
 exports.userComplaints = (req, res) => {
-  
+  let token = req.body.token;
+  let Complaints = API.models.Complaints
+
+  Complaints.find().byToken(token).exec((err, complaints) => {
+    if(err) return res.status(500).send()
+    res.status(200).send({
+      data: complaints
+    })
+  })
 }
