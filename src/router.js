@@ -11,9 +11,14 @@ exports.init = (app) => {
   // app.post('/userReports', API.controllers.report.userReports)
 
   app.post('/getPoints', (req, res, next) => {
-    
-    Reports.find({}, (err, resp) => {
-      res.send(resp)
+    let lat = req.body.lat
+    let lng = req.body.lng
+
+    Reports.find({loc:{$near:{$geometry:{type:"Point", coordinates:[lng ,lat]}, $maxDistance:10000}}}, (err, resp) => {
+      if(err) return res.status(403).send(err)
+      res.send({
+        data: resp
+      })
     })
   })
 

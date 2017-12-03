@@ -39,5 +39,7 @@ exports.connect = () => {
       console.log('Database Connected!');
       resolve();
     });
+
+    
   })
 }
