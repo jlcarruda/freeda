@@ -32,10 +32,9 @@ app.all('/*', function(req, res, next) {
 
 
 FreedaAPI.init(app, config).then( () => {
-    if(process.env.NODE_ENV == 'production') {
-      config.port = process.env.PORT
-      config.host = process.env.IP
-    }
+    config.port = (process.env.PORT) ? process.env.PORT : config.port
+    config.host = (process.env.IP) ? process.env.IP : config.host
+    
 
     app.listen(config.port, config.host, (err) => {
       console.log('FreedaAPI is ALIVE!')
