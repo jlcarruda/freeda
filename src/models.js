@@ -27,6 +27,7 @@ exports.createModel = (blueprint) => {
 exports.connect = () => {
 
   return new Promise( (resolve, reject) => {
+    mongoose.Promise = Promise;
     mongoose.connect(config.database.uri, {useMongoClient: true})
     const db = mongoose.connection;
   

@@ -13,9 +13,9 @@ exports.init = (app) => {
   app.post('/getPoints', (req, res, next) => {
     let lat = req.body.lat
     let lng = req.body.lng
-
-    Reports.find({loc:{$near:{$geometry:{type:"Point", coordinates:[lng ,lat]}, $maxDistance:10000}}}, (err, resp) => {
-      if(err) return res.status(403).send(err)
+    Reports.find().then( (resp) => {
+    // Reports.find({loc:{$near:{$geometry:{type:"Point", coordinates:[lng ,lat]}, $maxDistance:10000}}}, (err, resp) => {
+      // if(err) return res.status(403).send(err)
       res.send({
         data: resp
       })
