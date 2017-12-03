@@ -23,10 +23,9 @@ exports.init = (app) => {
       response.data = resp
       return SafePoints.find({}, 'lat lng type');
     }).then( (resp) => {
+      response.data.concat(resp)
       
-      res.status(200).send({
-        data: resp
-      })
+      res.status(200).send(response)
     }).catch( (err) => {
       console.log(err);
       res.status(500).send({
